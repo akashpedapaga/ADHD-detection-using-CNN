@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LIME Visualization</title>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <style>
+        .lime {
+            font-family: Arial, sans-serif;
+        }
+        .table_div table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table_div th, .table_div td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .text_div {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-div"></div>
+    <div id="text-div"></div>
+    <div id="table-div"></div>
+    <script src="lime_explanation.js"></script>
+    <script>
+        // Initialize Explanation instance
+        var explanation = new Explanation(['class1', 'class2']);
+
+        // Example 1: Creating a bar chart for feature importances
+        var exp = [['feature1', 0.5], ['feature2', -0.3], ['feature3', 0.2]];
+        var label = 1;
+        var chartDiv = d3.select('#chart-div');
+        explanation.show(exp, label, chartDiv);
+
+        // Example 2: Highlighting important words in text
+        var raw_text = "This is a sample text for explanation.";
+        var word_exp = [['sample', 10, 0.6], ['explanation', 27, -0.4]];
+        var textDiv = d3.select('#text-div');
+        explanation.show_raw_text(word_exp, label, raw_text, textDiv);
+
+        // Example 3: Displaying a table with feature contributions
+        var tabular_exp = [['feature1', 5, 0.5], ['feature2', 3, -0.3]];
+        var tableDiv = d3.select('#table-div');
+        explanation.show_raw_tabular(tabular_exp, label, tableDiv);
+    </script>
+</body>
+</html>
