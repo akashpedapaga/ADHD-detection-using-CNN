@@ -1,0 +1,6 @@
+*.log
+*.csv
+*.pkl
+*.h5
+__pycache__/
+.DS_Store
